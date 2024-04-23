@@ -30,12 +30,13 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_1_8
-        targetCompatibility = JavaVersion.VERSION_1_8
+        sourceCompatibility = JavaVersion.VERSION_11
+        targetCompatibility = JavaVersion.VERSION_11
     }
     kotlinOptions {
-        jvmTarget = "1.8"
+        jvmTarget = "11"
     }
+
     buildFeatures {
         compose = true
     }
@@ -65,6 +66,10 @@ dependencies {
     implementation(libs.picasso.transformations)
     implementation(libs.chatkit)
     implementation(libs.androidx.legacy.support.v4)
+    implementation(libs.androidx.recyclerview)
+    implementation(libs.androidx.appcompat)
+    implementation("com.jakewharton.timber:timber:5.0.1")
+    implementation(libs.androidx.constraintlayout)
 
 
     testImplementation(libs.junit)
