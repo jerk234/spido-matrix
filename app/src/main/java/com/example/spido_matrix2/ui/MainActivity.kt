@@ -1,37 +1,62 @@
+/*
+ * Copyright (c) 2020 New Vector Ltd
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package com.example.spido_matrix2.ui
 
 import android.os.Bundle
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
-import androidx.recyclerview.widget.DiffUtil
-import com.example.spido_matrix2.data.TimelineEventMessageWrapper
 import com.example.spido_matrix2.R
 import com.example.spido_matrix2.SessionHolder
+import com.example.spido_matrix2.ui.RoomListFragment
+import com.example.spido_matrix2.ui.SimpleLoginFragment
 
 
-class TimelineEventMessagesDiffUtilCallback(
-    private val oldList: List<TimelineEventMessageWrapper>,
-    private val newList: List<TimelineEventMessageWrapper>
-) : DiffUtil.Callback() {
+class MainActivity : AppCompatActivity() {
 
-    override fun getOldListSize(): Int {
-        return oldList.size
+    override fun onCreate(savedInstanceState: Bundle?) {
+        window.statusBarColor = ContextCompat.getColor(this, R.color.divider)
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_main)
+        if (savedInstanceState == null) {
+            if (SessionHolder.currentSession != null) {
+                displayRoomList()
+            } else {
+                displayLogin()
+            }
+        }
     }
 
-    override fun getNewListSize(): Int {
-        return newList.size
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        if (item.itemId == android.R.id.home) {
+            onBackPressedDispatcher.onBackPressed()
+            return true
+        }
+
+        return super.onOptionsItemSelected(item)
     }
 
-    override fun areItemsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {
-        val oldItem = oldList[oldItemPosition]
-        val newItem = newList[newItemPosition]
-        return oldItem.id == newItem.id
+    private fun displayLogin() {
+        val fragment = SimpleLoginFragment()
+        supportFragmentManager.beginTransaction().replace(R.id.fragmentContainer, fragment).commit()
     }
 
-    override fun areContentsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {
-        val oldItem = oldList[oldItemPosition]
-        val newItem = newList[newItemPosition]
-        return oldItem == newItem
+    private fun displayRoomList() {
+        val fragment = RoomListFragment()
+        supportFragmentManager.beginTransaction().replace(R.id.fragmentContainer, fragment).commit()
     }
 }

@@ -39,6 +39,7 @@ android {
 
     buildFeatures {
         compose = true
+        viewBinding= true
     }
     composeOptions {
         kotlinCompilerExtensionVersion = "1.5.12"
@@ -70,7 +71,7 @@ dependencies {
     implementation(libs.androidx.appcompat)
     implementation("com.jakewharton.timber:timber:5.0.1")
     implementation(libs.androidx.constraintlayout)
-
+    implementation ("androidx.appcompat:appcompat:1.6.1")
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)

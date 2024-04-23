@@ -27,7 +27,9 @@ import com.example.spido_matrix2.utils.MatrixItemColorProvider
 import com.stfalcon.chatkit.commons.ImageLoader
 import org.matrix.android.sdk.api.session.getRoom
 import com.example.spido_matrix2.databinding.FragmentLoginBinding
-class RoomDetailFragment : Fragment(), Timeline.Listener, ToolbarConfigurable {
+import com.example.spido_matrix2.databinding.FragmentRoomDetailBinding
+
+class RoomListFragment : Fragment(), Timeline.Listener, ToolbarConfigurable {
 
     companion object {
 

@@ -92,3 +92,4 @@ class SimpleLoginFragment : Fragment() {
             .replace(R.id.fragmentContainer, fragment).commit()
     }
 }
+

@@ -4,7 +4,7 @@ import com.stfalcon.chatkit.utils.DateFormatter
 import java.util.Date
 
 
-class RoomListDateFormatter {
+class RoomListDateFormatter: DateFormatter.Formatter {
     override fun format(date: Date): String {
         return if (DateFormatter.isToday(date)) {
             DateFormatter.format(date, DateFormatter.Template.TIME)

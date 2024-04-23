@@ -39,7 +39,7 @@ class RoomDetailFragment : Fragment(), Timeline.Listener, ToolbarConfigurable {
         }
     }
 
-    private var _views:  = null
+    private var _views: FragmentRoomDetailBinding? = null
     private val views get() = _views!!
 
     private val session = SessionHolder.currentSession!!
