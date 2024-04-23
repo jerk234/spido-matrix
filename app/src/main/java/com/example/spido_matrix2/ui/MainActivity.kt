@@ -16,30 +16,91 @@
 
 package com.example.spido_matrix2.ui
 
+import android.os.Build
 import android.os.Bundle
+import android.view.LayoutInflater
 import android.view.MenuItem
+import androidx.activity.compose.setContent
+import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.viewinterop.AndroidView
 import androidx.core.content.ContextCompat
+import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.navigation.NavController
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.rememberNavController
+import com.example.spido.pagemain.Overview
 import com.example.spido_matrix2.R
 import com.example.spido_matrix2.SessionHolder
 import com.example.spido_matrix2.ui.RoomListFragment
 import com.example.spido_matrix2.ui.SimpleLoginFragment
+import org.matrix.android.sdk.sample.AppTheme
+import org.matrix.android.sdk.sample.compoment.ExpandableCardViewModel
+import org.matrix.android.sdk.sample.compoment.LoginScreen
+import org.matrix.android.sdk.sample.compoment.Userallow
+import org.matrix.android.sdk.sample.compoment.pagemain.Community
+import org.matrix.android.sdk.sample.compoment.pagemain.Fitness
 
 
 class MainActivity : AppCompatActivity() {
+    private lateinit var navController: NavController
 
+    @RequiresApi(Build.VERSION_CODES.Q)
     override fun onCreate(savedInstanceState: Bundle?) {
-        window.statusBarColor = ContextCompat.getColor(this, R.color.divider)
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
-        if (savedInstanceState == null) {
-            if (SessionHolder.currentSession != null) {
-                displayRoomList()
-            } else {
-                displayLogin()
+
+        window.statusBarColor = ContextCompat.getColor(this, R.color.divider)
+        setContent {
+            val expandableCardViewModel: ExpandableCardViewModel = viewModel()
+            val navController = rememberNavController()
+            this@MainActivity.navController = navController // Assigning to the class-level variable
+
+            AppTheme {
+
+                NavHost(navController = navController, startDestination = "Userallow") {
+
+                    composable("LoginButton") {
+                        LoginScreen(navController) }
+
+                    composable("Userallow") {
+                        Userallow(navController)
+                    }
+                    composable("LoginScreen") {
+                        LoginScreen(navController)
+                    }
+                    composable("Overview") {
+                        Overview(navController, expandableCardViewModel)
+                    }
+                    composable("Fitness") {
+                        Fitness(navController,expandableCardViewModel)
+                    }
+                    composable("Community") {
+                        Community(navController)
+                    }
+                    composable("SimpleLoginFragment"){
+                        SimpleLoginFragment()
+                    }
+                    composable("SimpleLoginFragment") {
+                        FragmentLoginScreen(navController = navController)
+                    }
+                }
             }
         }
     }
+
+    @Deprecated("Deprecated in Java")
+    @Suppress("DEPRECATION")
+    @RequiresApi(Build.VERSION_CODES.Q)
+    override fun onBackPressed() {
+        super.onBackPressed()
+        // Intercept the back button press event and navigate to "Overview" always
+        navController.navigate("Overview")
+    }
+
+
+
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         if (item.itemId == android.R.id.home) {
@@ -59,4 +120,15 @@ class MainActivity : AppCompatActivity() {
         val fragment = RoomListFragment()
         supportFragmentManager.beginTransaction().replace(R.id.fragmentContainer, fragment).commit()
     }
+}
+
+@Suppress("UNUSED_PARAMETER")
+@Composable
+fun FragmentLoginScreen(navController: NavController) {
+    AndroidView(
+        factory = { context ->
+            // 使用布局加载器加载 XML 布局文件
+            LayoutInflater.from(context).inflate(R.layout.fragment_login, null)
+        }
+    )
 }

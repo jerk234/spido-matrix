@@ -7,7 +7,8 @@ import org.matrix.android.sdk.api.Matrix
 import org.matrix.android.sdk.api.MatrixConfiguration
 import timber.log.Timber
 
-class SampleApp : Application()  {
+class SampleApp : Application() {
+
     private lateinit var matrix: Matrix
 
     override fun onCreate() {

@@ -1,7 +1,10 @@
 [versions]
 agp = "8.3.2"
+appcompatVersion = "1.3.1"
 chatkit = "0.4.1"
+chatkitVersion = "0.3.3"
 comAmulyakhareTextdrawable = "1.0.1"
+coreKtxVersion = "1.12.0"
 kotlin = "1.9.23"
 coreKtx = "1.13.0"
 junit = "4.13.2"
@@ -11,16 +14,31 @@ legacySupportV4 = "1.0.0"
 lifecycleRuntimeKtx = "2.7.0"
 activityCompose = "1.9.0"
 composeBom = "2024.04.01"
+material = "1.11.0"
 matrixAndroidSdk2 = "1.6.10"
+navigationCompose = "2.7.7"
 picasso = "2.71828"
 picassoTransformations = "2.4.0"
+picassoTransformationsVersion = "2.2.1"
 recyclerview = "1.3.2"
 appcompat = "1.6.1"
 constraintlayout = "2.1.4"
+navigationRuntimeKtx = "2.7.7"
+tensorflowLiteGpu = "2.3.0"
+tensorflowLiteMetadata = "0.1.0"
+tensorflowLiteSupport = "0.1.0"
+timber = "5.0.1"
+timberVersion = "4.7.1"
+uiTextGoogleFonts = "1.6.6"
+cameraCore = "1.3.3"
 
 [libraries]
+androidx-appcompat-v131 = { module = "androidx.appcompat:appcompat", version.ref = "appcompatVersion" }
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
+androidx-core-ktx-v1120 = { module = "androidx.core:core-ktx", version.ref = "coreKtxVersion" }
 androidx-legacy-support-v4 = { module = "androidx.legacy:legacy-support-v4", version.ref = "legacySupportV4" }
+androidx-navigation-compose = { module = "androidx.navigation:navigation-compose", version.ref = "navigationCompose" }
+androidx-ui-text-google-fonts = { module = "androidx.compose.ui:ui-text-google-fonts", version.ref = "uiTextGoogleFonts" }
 chatkit = { module = "com.github.stfalcon-studio:Chatkit", version.ref = "chatkit" }
 com-amulyakhare-textdrawable = { module = "com.amulyakhare:com.amulyakhare.textdrawable", version.ref = "comAmulyakhareTextdrawable" }
 junit = { group = "junit", name = "junit", version.ref = "junit" }
@@ -36,12 +54,22 @@ androidx-ui-tooling-preview = { group = "androidx.compose.ui", name = "ui-toolin
 androidx-ui-test-manifest = { group = "androidx.compose.ui", name = "ui-test-manifest" }
 androidx-ui-test-junit4 = { group = "androidx.compose.ui", name = "ui-test-junit4" }
 androidx-material3 = { group = "androidx.compose.material3", name = "material3" }
+material = { module = "com.google.android.material:material", version.ref = "material" }
 matrix-android-sdk2 = { module = "org.matrix.android:matrix-android-sdk2", version.ref = "matrixAndroidSdk2" }
 picasso = { module = "com.squareup.picasso:picasso", version.ref = "picasso" }
 picasso-transformations = { module = "jp.wasabeef:picasso-transformations", version.ref = "picassoTransformations" }
 androidx-recyclerview = { group = "androidx.recyclerview", name = "recyclerview", version.ref = "recyclerview" }
 androidx-appcompat = { group = "androidx.appcompat", name = "appcompat", version.ref = "appcompat" }
 androidx-constraintlayout = { group = "androidx.constraintlayout", name = "constraintlayout", version.ref = "constraintlayout" }
+androidx-navigation-runtime-ktx = { group = "androidx.navigation", name = "navigation-runtime-ktx", version.ref = "navigationRuntimeKtx" }
+picasso-transformations-v221 = { module = "jp.wasabeef:picasso-transformations", version.ref = "picassoTransformationsVersion" }
+stfalcon-chatkit = { module = "com.github.stfalcon:chatkit", version.ref = "chatkitVersion" }
+tensorflow-lite-gpu = { module = "org.tensorflow:tensorflow-lite-gpu", version.ref = "tensorflowLiteGpu" }
+tensorflow-lite-metadata = { module = "org.tensorflow:tensorflow-lite-metadata", version.ref = "tensorflowLiteMetadata" }
+tensorflow-lite-support = { module = "org.tensorflow:tensorflow-lite-support", version.ref = "tensorflowLiteSupport" }
+timber = { module = "com.jakewharton.timber:timber", version.ref = "timber" }
+timber-v471 = { module = "com.jakewharton.timber:timber", version.ref = "timberVersion" }
+androidx-camera-core = { group = "androidx.camera", name = "camera-core", version.ref = "cameraCore" }
 
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }
