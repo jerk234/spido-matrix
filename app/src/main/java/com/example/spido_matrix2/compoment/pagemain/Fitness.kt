@@ -27,10 +27,15 @@ import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
+import com.example.spido_matrix2.R
+import com.example.spido_matrix2.compoment.PicCardwithtext
+import com.example.spido_matrix2.compoment.fitcard
 import org.matrix.android.sdk.sample.compoment.ExpandableCard3
+import org.matrix.android.sdk.sample.compoment.ExpandableCard5
+import org.matrix.android.sdk.sample.compoment.ExpandableCard6
 import org.matrix.android.sdk.sample.compoment.ExpandableCardViewModel
 import org.matrix.android.sdk.sample.compoment.HappyCard
-import org.matrix.android.sdk.sample.compoment.HappyCard2
+
 import org.matrix.android.sdk.sample.compoment.PoseActivity
 import org.matrix.android.sdk.sample.compoment.SootheBottomNavigation2
 import org.matrix.android.sdk.sample.compoment.TestAppbar
@@ -90,17 +95,13 @@ fun Fitness(navController: NavController,viewModel: ExpandableCardViewModel) {
                             .padding(all = 4.dp)
                             .padding(start = 8.dp), fontSize = 25.sp
                     )
-                    OutlinedTextField(value = viewModel.name.value,
-                        onValueChange = { newValue -> viewModel.name.value = newValue },
-                        label = { Text("Name") },
-                    )
                     val expandableCardViewModel: ExpandableCardViewModel = viewModel()
                     Row(modifier = Modifier.horizontalScroll(rememberScrollState())) {
-                        ExpandableCard3(expandableCardViewModel,titletext =viewModel.name.value)
-                        ExpandableCard3(expandableCardViewModel,titletext =viewModel.name.value)
-                        ExpandableCard3(expandableCardViewModel,titletext =viewModel.name.value)
-                        ExpandableCard3(expandableCardViewModel,titletext =viewModel.name.value)
-                        ExpandableCard3(expandableCardViewModel,titletext =viewModel.name.value)
+                        PicCardwithtext(navController,img = R.drawable.pexels2)
+                        PicCardwithtext(navController,img = R.drawable.pexels3)
+                        PicCardwithtext(navController,img = R.drawable.pexelsfit1)
+                        PicCardwithtext(navController,img = R.drawable.pexelsfit2)
+
                     }
                     Text(
                         text = "  Like", modifier = Modifier
@@ -108,9 +109,9 @@ fun Fitness(navController: NavController,viewModel: ExpandableCardViewModel) {
                             .padding(start = 8.dp), fontSize = 25.sp
                     )
                     Row(modifier = Modifier.horizontalScroll(rememberScrollState())) {
-                        HappyCard2()
-                        HappyCard2()
-                        HappyCard2()
+                        fitcard(navController)
+                        fitcard(navController)
+                        fitcard(navController)
                     }
                     Text(
                         text = "  Fit", modifier = Modifier
@@ -118,9 +119,9 @@ fun Fitness(navController: NavController,viewModel: ExpandableCardViewModel) {
                             .padding(start = 8.dp), fontSize = 25.sp
                     )
                     Row(modifier = Modifier.horizontalScroll(rememberScrollState())) {
-                        HappyCard()
-                        HappyCard()
-                        HappyCard()
+                        fitcard(navController)
+                        fitcard(navController)
+                        fitcard(navController)
                     }
                 }
             }

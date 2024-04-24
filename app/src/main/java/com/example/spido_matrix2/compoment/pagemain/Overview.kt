@@ -60,18 +60,6 @@ fun Overview(navController: NavController,viewModel: ExpandableCardViewModel) {
                     .verticalScroll(rememberScrollState())
             ) {
                 CustomProgressBarPreview()
-                Row(modifier = Modifier.fillMaxWidth()) {
-                    var name by remember { mutableStateOf("") }
-                    val expandableCardViewModel: ExpandableCardViewModel = viewModel()
-                    TextField(
-                        value = viewModel.name.value,
-                        onValueChange = {
-                            viewModel.name.value = it
-                        },
-                        label = { Text("输入文本") }
-                    )
-                }
-
                 OverViewCard2(isDarkTheme = true)
                 OverViewCard1()
                 OverViewCard1()

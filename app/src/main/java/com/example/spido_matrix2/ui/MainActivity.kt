@@ -33,9 +33,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.example.spido.pagemain.Overview
 import com.example.spido_matrix2.R
-import com.example.spido_matrix2.SessionHolder
-import com.example.spido_matrix2.ui.RoomListFragment
-import com.example.spido_matrix2.ui.SimpleLoginFragment
+import com.example.spido_matrix2.compoment.Cardpages.Cardpage
 import org.matrix.android.sdk.sample.AppTheme
 import org.matrix.android.sdk.sample.compoment.ExpandableCardViewModel
 import org.matrix.android.sdk.sample.compoment.LoginScreen
@@ -84,6 +82,9 @@ class MainActivity : AppCompatActivity() {
                     }
                     composable("SimpleLoginFragment") {
                         FragmentLoginScreen(navController = navController)
+                    }
+                    composable("Cardpage"){
+                        Cardpage(navController)
                     }
                 }
             }
