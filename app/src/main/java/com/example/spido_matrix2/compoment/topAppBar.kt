@@ -1,6 +1,7 @@
 package org.matrix.android.sdk.sample.compoment
 
 import android.annotation.SuppressLint
+import android.widget.Toast
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
@@ -10,6 +11,7 @@ import androidx.compose.material.icons.filled.CalendarMonth
 import androidx.compose.material.icons.filled.Edit
 import androidx.compose.material.icons.filled.Menu
 import androidx.compose.material.icons.filled.MoreVert
+import androidx.compose.material.icons.filled.PhonelinkSetup
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.DatePicker
@@ -26,6 +28,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
@@ -40,18 +43,19 @@ import com.example.spido_matrix2.ui.theme.fontFamily
 @Suppress("UNUSED_PARAMETER")
 @Composable
 fun TestAppbar(navController: NavController) {
+    val context = LocalContext.current
     CenterAlignedTopAppBar(
         title = { Text(text = "Spido", maxLines = 1, fontFamily = fontFamily, overflow = TextOverflow.Ellipsis) },
         navigationIcon = {
-            IconButton(onClick = { /*TODO*/ }) {
+            IconButton(onClick = { Toast.makeText(context, "Working in progress", Toast.LENGTH_SHORT).show() }) {
                 Icon(
-                    imageVector = Icons.Filled.Menu,
+                    imageVector = Icons.Filled.PhonelinkSetup,
                     contentDescription ="Localized description"
                 )
             }
         },
         actions = {
-            IconButton(onClick = { /* doSomething() */ }) {
+            IconButton(onClick = { Toast.makeText(context, "Working in progress", Toast.LENGTH_SHORT).show() }) {
                 Icon(
                     imageVector = Icons.Filled.AccountCircle,
                     contentDescription = "Localized description"
@@ -65,6 +69,7 @@ fun TestAppbar(navController: NavController) {
 @Composable
 fun TestAppbarPv(){
     val navController = rememberNavController()
+
     TestAppbar(navController = navController)
 }
 
@@ -74,12 +79,13 @@ fun TestAppbarPv(){
 
 @Composable
 fun Happytopbar(navController: NavController) {
+    val context = LocalContext.current
     var isDatePickerDialogVisible by remember { mutableStateOf(false) }
 
     CenterAlignedTopAppBar(
         title = { Text(text = "Today", maxLines = 1, fontFamily = fontFamily, overflow = TextOverflow.Ellipsis) },
         navigationIcon = {
-            IconButton(onClick = { /* doSomething() */ }) {
+            IconButton(onClick = {Toast.makeText(context, "Working in progress", Toast.LENGTH_SHORT).show() }) {
                 Icon(
                     imageVector = Icons.Filled.Edit,
                     contentDescription = "Localized description"
