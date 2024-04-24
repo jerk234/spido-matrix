@@ -1,15 +1,13 @@
-package org.matrix.android.sdk.sample.compoment
+package com.example.spido_matrix2.compoment
 
 import android.Manifest
 import android.annotation.SuppressLint
 import android.content.Context
-import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
 import android.graphics.Canvas
 import android.graphics.Color
 import android.graphics.Paint
-import android.graphics.Rect
 import android.graphics.SurfaceTexture
 import android.hardware.camera2.CameraCaptureSession
 import android.hardware.camera2.CameraDevice
@@ -34,18 +32,17 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import com.example.spido_matrix2.R
 import com.example.spido_matrix2.ml.LiteModelMovenetSingleposeLightningTfliteFloat164
-
 import org.tensorflow.lite.DataType
 import org.tensorflow.lite.support.image.ImageProcessor
 import org.tensorflow.lite.support.image.TensorImage
 import org.tensorflow.lite.support.image.ops.ResizeOp
-import org.tensorflow.lite.support.image.ops.ResizeOp.ResizeMethod
 import org.tensorflow.lite.support.tensorbuffer.TensorBuffer
 import kotlin.math.acos
 import kotlin.math.roundToInt
 import kotlin.math.sqrt
 
-class PoseActivity : AppCompatActivity() {
+
+class zxj : AppCompatActivity() {
     private lateinit var countDownTimer: CountDownTimer
     private var isCountDownRunning = false
     private val paint = Paint()
@@ -89,7 +86,7 @@ class PoseActivity : AppCompatActivity() {
         setContentView(R.layout.fragment_layout)
 
         // Initialize components
-        imageProcessor = ImageProcessor.Builder().add(ResizeOp(192, 192, ResizeMethod.BILINEAR)).build()
+        imageProcessor = ImageProcessor.Builder().add(ResizeOp(192, 192, ResizeOp.ResizeMethod.BILINEAR)).build()
         model = LiteModelMovenetSingleposeLightningTfliteFloat164.newInstance(this)
         imageView = findViewById(R.id.imageView)
         textureView = findViewById(R.id.textureView)
@@ -341,7 +338,7 @@ class PoseActivity : AppCompatActivity() {
                 isExerciseInProgress = true
                 angleCounter = 0
                 error = 0
-                model = LiteModelMovenetSingleposeLightningTfliteFloat164.newInstance(this@PoseActivity)
+                model = LiteModelMovenetSingleposeLightningTfliteFloat164.newInstance(this@zxj)
                 isCountDownRunning = false
                 // 隐藏倒计时文本
                 findViewById<TextView>(R.id.countdownTextView).visibility = View.GONE
