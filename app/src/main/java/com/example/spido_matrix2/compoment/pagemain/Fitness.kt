@@ -6,6 +6,8 @@ import android.content.Intent
 import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
@@ -21,6 +23,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -89,11 +92,12 @@ fun Fitness(navController: NavController,viewModel: ExpandableCardViewModel) {
                         Text(text = "Tennis")
                     }
                 }
+                Spacer(modifier = Modifier.height(25.dp))
                 Column {var name by remember { mutableStateOf("") }
                     Text(
                         text = "  Special", modifier = Modifier
-                            .padding(all = 4.dp)
-                            .padding(start = 8.dp), fontSize = 25.sp
+                            .padding(all = 8.dp)
+                            .padding(start = 12.dp), fontSize = 24.sp, fontWeight = FontWeight.Bold
                     )
                     val expandableCardViewModel: ExpandableCardViewModel = viewModel()
                     Row(modifier = Modifier.horizontalScroll(rememberScrollState())) {
@@ -106,10 +110,11 @@ fun Fitness(navController: NavController,viewModel: ExpandableCardViewModel) {
                         PicCardwithtext(navController,
                             img = R.drawable.pexelsfit2,go = "Cardpage4",title = "Now is time for Swimming")
                     }
+                    Spacer(modifier = Modifier.height(25.dp))
                     Text(
                         text = "  Like", modifier = Modifier
-                            .padding(all = 4.dp)
-                            .padding(start = 8.dp), fontSize = 25.sp
+                            .padding(all = 8.dp)
+                            .padding(start = 12.dp), fontSize = 24.sp, fontWeight = FontWeight.Bold
                     )
                     Row(modifier = Modifier.horizontalScroll(rememberScrollState())) {
                         fitcard(navController,
@@ -119,10 +124,11 @@ fun Fitness(navController: NavController,viewModel: ExpandableCardViewModel) {
                         fitcard(navController,
                             img = R.drawable.pexelsfit4,go = "Cardpage2",title = "Start your yoga routine")
                     }
+                    Spacer(modifier = Modifier.height(25.dp))
                     Text(
                         text = "  Fit", modifier = Modifier
-                            .padding(all = 4.dp)
-                            .padding(start = 8.dp), fontSize = 25.sp
+                            .padding(all = 8.dp)
+                            .padding(start = 12.dp), fontSize = 24.sp, fontWeight = FontWeight.Bold
                     )
                     Row(modifier = Modifier.horizontalScroll(rememberScrollState())) {
                         fitcard(navController,
