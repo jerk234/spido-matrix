@@ -9,6 +9,7 @@ import jp.wasabeef.picasso.transformations.CropCircleTransformation
 import org.matrix.android.sdk.api.session.content.ContentUrlResolver
 import org.matrix.android.sdk.api.util.MatrixItem
 
+
 class AvatarRenderer(private val matrixItemColorProvider: MatrixItemColorProvider) {
 
     companion object {
