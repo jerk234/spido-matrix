@@ -24,6 +24,7 @@ import androidx.activity.compose.setContent
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.viewinterop.AndroidView
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.viewmodel.compose.viewModel
@@ -34,6 +35,7 @@ import androidx.navigation.compose.rememberNavController
 import com.example.spido.pagemain.Overview
 import com.example.spido_matrix2.R
 import com.example.spido_matrix2.SessionHolder
+import com.example.spido_matrix2.sensor.SensorInfoScreen
 import com.example.spido_matrix2.ui.RoomListFragment
 import com.example.spido_matrix2.ui.SimpleLoginFragment
 import org.matrix.android.sdk.sample.AppTheme
@@ -84,6 +86,15 @@ class MainActivity : AppCompatActivity() {
                     }
                     composable("SimpleLoginFragment") {
                         FragmentLoginScreen(navController = navController)
+                    }
+
+                    composable("sensorInfoScreen") {
+                        val context = LocalContext.current
+                        SensorInfoScreen(
+                            context = context,
+                            errorMessage = "Example Error Message",
+                            onResetSteps = {}
+                        )
                     }
                 }
             }
