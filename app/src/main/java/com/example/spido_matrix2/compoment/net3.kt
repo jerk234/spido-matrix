@@ -15,8 +15,8 @@ import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
-import androidx.compose.material.Icon
-import androidx.compose.material.Text
+import androidx.compose.material3.Icon
+import androidx.compose.material3.Text
 
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.AccountCircle
@@ -171,148 +171,148 @@ fun CustomProgressBarPreview() {
     }
 }
 
-
-@OptIn(ExperimentalMaterial3Api::class)
-@Suppress("UNUSED_PARAMETER")
-@Composable//标题栏1
-fun topappbarA(navController: NavController){
-    androidx.compose.material.TopAppBar(
-        modifier = Modifier.fillMaxWidth()
-//            .height(80.dp), // 设置首选高度为80dp
-        , backgroundColor = Color(0xFFF1F3E9)
-    ) {
-        Spacer(modifier = Modifier.width(12.dp))
-        androidx.compose.material.IconButton(onClick = { /*TODO*/ }) {
-            Icon(imageVector = Icons.Default.DensitySmall, contentDescription = null)
-        }
-
-        Spacer(modifier = Modifier.width(19.dp))
-        Text(
-            text = "               Firearms wiki",
-            textAlign = TextAlign.Center,
-            modifier = Modifier.weight(1f)
-        )
-
-        Spacer(modifier = Modifier.width(100.dp))
-//        IconButton(onClick = { /*TODO*/ }) {
-//            Icon(imageVector = Icons.Default.AttachFile, contentDescription = null)
-//        }
 //
-//        IconButton(onClick = { /*TODO*/ }) {
-//            Icon(imageVector = Icons.Default.CalendarToday, contentDescription = null)
-//        }
-
-        androidx.compose.material.IconButton(onClick = { /*TODO*/ }) {
-            Icon(imageVector = Icons.Default.AccountCircle, contentDescription = null)
-        }
-    }
-}
-
-@OptIn(ExperimentalMaterial3Api::class)
-@Suppress("UNUSED_PARAMETER")
-@Composable//标题栏2
-fun topappbarB(){
-    androidx.compose.material.TopAppBar(
-        modifier = Modifier.fillMaxWidth(), backgroundColor = Color(0xFFF1F3E9)
-    ) {
-        Spacer(modifier = Modifier.width(12.dp))
-        androidx.compose.material.IconButton(onClick = { /*TODO*/ }) {
-            Icon(imageVector = Icons.Default.AppRegistration, contentDescription = null)
-        }
-
-        Spacer(modifier = Modifier.width(12.dp))
-        Text(
-            text = "                       Today",
-            textAlign = TextAlign.Center,
-            modifier = Modifier.weight(1f)
-        )
-
-
-        Spacer(modifier = Modifier.width(100.dp))
-        androidx.compose.material.IconButton(onClick = { /*TODO*/ }) {
-            Icon(imageVector = Icons.Default.Today, contentDescription = null)
-        }
-
-        androidx.compose.material.IconButton(onClick = { /*TODO*/ }) {
-            Icon(imageVector = Icons.Default.MoreVert, contentDescription = null)
-        }
-
-//        IconButton(onClick = { /*TODO*/ }) {
+//@OptIn(ExperimentalMaterial3Api::class)
+//@Suppress("UNUSED_PARAMETER")
+//@Composable//标题栏1
+//fun topappbarA(navController: NavController){
+//    androidx.compose.material.TopAppBar(
+//        modifier = Modifier.fillMaxWidth()
+////            .height(80.dp), // 设置首选高度为80dp
+//        , backgroundColor = Color(0xFFF1F3E9)
+//    ) {
+//        Spacer(modifier = Modifier.width(12.dp))
+//        androidx.compose.material.IconButton(onClick = { /*TODO*/ }) {
 //            Icon(imageVector = Icons.Default.DensitySmall, contentDescription = null)
 //        }
-    }
-}
+//
+//        Spacer(modifier = Modifier.width(19.dp))
+//        Text(
+//            text = "               Firearms wiki",
+//            textAlign = TextAlign.Center,
+//            modifier = Modifier.weight(1f)
+//        )
+//
+//        Spacer(modifier = Modifier.width(100.dp))
+////        IconButton(onClick = { /*TODO*/ }) {
+////            Icon(imageVector = Icons.Default.AttachFile, contentDescription = null)
+////        }
+////
+////        IconButton(onClick = { /*TODO*/ }) {
+////            Icon(imageVector = Icons.Default.CalendarToday, contentDescription = null)
+////        }
+//
+//        androidx.compose.material.IconButton(onClick = { /*TODO*/ }) {
+//            Icon(imageVector = Icons.Default.AccountCircle, contentDescription = null)
+//        }
+//    }
+//}
 
-@Composable//底边栏
-fun SootheBottomNavigationA() {
-    Box(
-        Modifier.navigationBarsPadding(),
-        contentAlignment = Alignment.BottomCenter
-    ) {
-        Row(
-            modifier = Modifier
-                .background(Color(0xFFECEFE3)) // 设置背景颜色为#ECEFE3
-                .fillMaxWidth()
-                .padding(1.dp),
-            horizontalArrangement = Arrangement.SpaceEvenly
-        ) {
-            NavigationBarItem(
-                icon = {
-                    androidx.compose.material3.Icon(
-                        imageVector = Icons.Default.Radar,
-                        contentDescription = null
-                    )
-                },
-                label = {
-                    androidx.compose.material3.Text(
-                        text = "Overview"
-                    )
-                },
-                selected = false,
-                onClick = {
-                    // navController.navigate("Overview")
-                },
-                modifier = Modifier.background(Color(0xFFECEFE3))
-            )
-            NavigationBarItem(
-                icon = {
-                    androidx.compose.material3.Icon(
-                        imageVector = Icons.Default.RunCircle,
-                        contentDescription = null
-                    )
-                },
-                label = {
-                    androidx.compose.material3.Text(
-                        text = "Fitness"
-                    )
-                },
-                selected = false,
-                onClick = {
-                    // navController.navigate("Fitness")
-                },
-                modifier = Modifier.background(Color(0xFFECEFE3))
-            )
-            NavigationBarItem(
-                icon = {
-                    androidx.compose.material3.Icon(
-                        imageVector = Icons.Default.MarkUnreadChatAlt,
-                        contentDescription = null
-                    )
-                },
-                label = {
-                    androidx.compose.material3.Text(
-                        text = "Community"
-                    )
-                },
-                selected = false,
-                onClick = {
-                    // navController.navigate("Community")
-                },
-                modifier = Modifier.background(Color(0xFFECEFE3))
-            )
-        }
-    }
-}
+//@OptIn(ExperimentalMaterial3Api::class)
+//@Suppress("UNUSED_PARAMETER")
+//@Composable//标题栏2
+//fun topappbarB(){
+//    androidx.compose.material.TopAppBar(
+//        modifier = Modifier.fillMaxWidth(), backgroundColor = Color(0xFFF1F3E9)
+//    ) {
+//        Spacer(modifier = Modifier.width(12.dp))
+//        androidx.compose.material.IconButton(onClick = { /*TODO*/ }) {
+//            Icon(imageVector = Icons.Default.AppRegistration, contentDescription = null)
+//        }
+//
+//        Spacer(modifier = Modifier.width(12.dp))
+//        Text(
+//            text = "                       Today",
+//            textAlign = TextAlign.Center,
+//            modifier = Modifier.weight(1f)
+//        )
+//
+//
+//        Spacer(modifier = Modifier.width(100.dp))
+//        androidx.compose.material.IconButton(onClick = { /*TODO*/ }) {
+//            Icon(imageVector = Icons.Default.Today, contentDescription = null)
+//        }
+//
+//        androidx.compose.material.IconButton(onClick = { /*TODO*/ }) {
+//            Icon(imageVector = Icons.Default.MoreVert, contentDescription = null)
+//        }
+//
+////        IconButton(onClick = { /*TODO*/ }) {
+////            Icon(imageVector = Icons.Default.DensitySmall, contentDescription = null)
+////        }
+//    }
+//}
+
+//@Composable//底边栏
+//fun SootheBottomNavigationA() {
+//    Box(
+//        Modifier.navigationBarsPadding(),
+//        contentAlignment = Alignment.BottomCenter
+//    ) {
+//        Row(
+//            modifier = Modifier
+//                .background(Color(0xFFECEFE3)) // 设置背景颜色为#ECEFE3
+//                .fillMaxWidth()
+//                .padding(1.dp),
+//            horizontalArrangement = Arrangement.SpaceEvenly
+//        ) {
+//            NavigationBarItem(
+//                icon = {
+//                    androidx.compose.material3.Icon(
+//                        imageVector = Icons.Default.Radar,
+//                        contentDescription = null
+//                    )
+//                },
+//                label = {
+//                    androidx.compose.material3.Text(
+//                        text = "Overview"
+//                    )
+//                },
+//                selected = false,
+//                onClick = {
+//                    // navController.navigate("Overview")
+//                },
+//                modifier = Modifier.background(Color(0xFFECEFE3))
+//            )
+//            NavigationBarItem(
+//                icon = {
+//                    androidx.compose.material3.Icon(
+//                        imageVector = Icons.Default.RunCircle,
+//                        contentDescription = null
+//                    )
+//                },
+//                label = {
+//                    androidx.compose.material3.Text(
+//                        text = "Fitness"
+//                    )
+//                },
+//                selected = false,
+//                onClick = {
+//                    // navController.navigate("Fitness")
+//                },
+//                modifier = Modifier.background(Color(0xFFECEFE3))
+//            )
+//            NavigationBarItem(
+//                icon = {
+//                    androidx.compose.material3.Icon(
+//                        imageVector = Icons.Default.MarkUnreadChatAlt,
+//                        contentDescription = null
+//                    )
+//                },
+//                label = {
+//                    androidx.compose.material3.Text(
+//                        text = "Community"
+//                    )
+//                },
+//                selected = false,
+//                onClick = {
+//                    // navController.navigate("Community")
+//                },
+//                modifier = Modifier.background(Color(0xFFECEFE3))
+//            )
+//        }
+//    }
+//}
 
 @Preview(
     showBackground = true,
