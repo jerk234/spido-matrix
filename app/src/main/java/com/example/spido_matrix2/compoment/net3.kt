@@ -122,7 +122,7 @@ fun CustomProgressBarPreview() {
     MaterialTheme {
         Column(
             modifier = Modifier
-                .background(if (isDarkMode) Color(0xFF141613) else Color.White) // 设置背景颜色，根据当前的 UI 模式
+                .background(if (isDarkMode) Color(0xFF141613) else Color(0xFFFCFDF3)) // 设置背景颜色，根据当前的 UI 模式
                 .fillMaxWidth() // 填充父布局
         ) {
             CustomProgressBar(

@@ -93,7 +93,7 @@ fun Happytopbar(navController: NavController) {
                     contentDescription = "Localized description"
                 )
             }
-            IconButton(onClick = { /* doSomething() */ }) {
+            IconButton(onClick = { navController.navigate("sensorInfoScreen")}) {
                 Icon(
                     imageVector = Icons.Filled.MoreVert,
                     contentDescription = "Localized description"

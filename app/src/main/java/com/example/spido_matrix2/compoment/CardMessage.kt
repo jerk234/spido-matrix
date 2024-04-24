@@ -17,6 +17,7 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.outlined.AccessAlarm
 import androidx.compose.material.icons.outlined.AccountCircle
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.ElevatedCard
@@ -56,14 +57,14 @@ fun OverViewCard1() {
             elevation = CardDefaults.cardElevation(
                 defaultElevation = 6.dp
             ),
-            modifier = Modifier.padding(horizontal = 18.dp)
+            modifier = Modifier.padding(horizontal =20.dp)
         ) {
             Row(
                 modifier = Modifier
                     .padding(all = 8.dp)
                     .clip(RoundedCornerShape(18.dp)) // Adding rounded corners to the card
 //            .background(backgroundColor) // Changing background color to the specified color
-                    .padding(all = 18.dp) // Padding to create space between the border and content
+                    .padding(all = 12.dp) // Padding to create space between the border and content
             ) {
                 Column(
                     modifier = Modifier.weight(1f)
@@ -74,9 +75,9 @@ fun OverViewCard1() {
                         fontWeight = FontWeight.SemiBold,
 //                color = fontcolor
                     )
-                    Spacer(modifier = Modifier.height(16.dp))
+                    Spacer(modifier = Modifier.height(4.dp))
                     Text(
-                        fontSize = 50.sp,
+                        fontSize = 36.sp,
                         fontWeight = FontWeight.SemiBold,
                         fontStyle = FontStyle.Normal,
                         text = "7hr 25m",
@@ -94,9 +95,10 @@ fun OverViewCard1() {
                     md_theme_light_primaryContainer
                 }
 
-                Column(modifier = Modifier.padding(horizontal = 12.dp)) {
+                Column(modifier = Modifier.padding(horizontal = 12.dp)
+                    .height(100.dp)) {
                     Box(modifier = Modifier
-                        .padding(vertical = 28.dp)
+                        .padding(vertical = 18.dp)
                         .clip(CircleShape)
                         .size(68.dp)
                         .background(backgroundColor)
@@ -104,8 +106,8 @@ fun OverViewCard1() {
                     ) {
                         Icon(modifier = Modifier
                             .fillMaxSize()
-                            .padding(all = 15.dp),
-                            imageVector = Icons.Outlined.AccountCircle,
+                            .padding(all = 10.dp),
+                            imageVector = Icons.Outlined.AccessAlarm,
                             contentDescription = null,
                         )
                     }
@@ -114,6 +116,7 @@ fun OverViewCard1() {
             }
         }}
 }
+
 
 @Preview(
     showBackground = true,
@@ -150,13 +153,13 @@ fun OverViewCard2(isDarkTheme: Boolean) {
             elevation = CardDefaults.cardElevation(
                 defaultElevation = 6.dp
             ),
-            modifier = Modifier.padding(horizontal = 18.dp)
+            modifier = Modifier.padding(horizontal = 20.dp)
         ) {
             Row(
                 modifier = Modifier
                     .padding(all = 8.dp)
                     .clip(RoundedCornerShape(18.dp)) // Adding rounded corners to the card
-                    .padding(all = 18.dp) // Padding to create space between the border and content
+                    .padding(all = 12.dp) // Padding to create space between the border and content
             ) {
                 Column(
                     modifier = Modifier.weight(1f)
@@ -167,9 +170,9 @@ fun OverViewCard2(isDarkTheme: Boolean) {
                         fontWeight = FontWeight.SemiBold,
                         //color = fontcolor
                     )
-                    Spacer(modifier = Modifier.height(16.dp))
+                    Spacer(modifier = Modifier.height(4.dp))
                     Text(
-                        fontSize = 50.sp,
+                        fontSize = 36.sp,
                         fontWeight = FontWeight.SemiBold,
                         fontStyle = FontStyle.Normal,
                         text = "7hr 25m",
@@ -234,7 +237,6 @@ fun OverViewCard2(isDarkTheme: Boolean) {
             }}
     }
 }
-
 
 
 
