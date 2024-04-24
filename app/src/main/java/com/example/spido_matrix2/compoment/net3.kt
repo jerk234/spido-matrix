@@ -115,8 +115,8 @@ fun CustomProgressBarPreview() {
     }
 
     // 根据当前的 UI 模式设置不同的颜色
-    val startColor = if (isDarkMode) Color(android.graphics.Color.parseColor("#0D4400")) else Color(android.graphics.Color.parseColor("#3B6A1C"))
-    val endColor = if (isDarkMode) Color(android.graphics.Color.parseColor("#6FB650")) else Color(android.graphics.Color.parseColor("#E8EDDE"))
+    val startColor = if (isDarkMode) Color(android.graphics.Color.parseColor("#0D4400")) else Color(android.graphics.Color.parseColor("#E8EDDE"))
+    val endColor = if (isDarkMode) Color(android.graphics.Color.parseColor("#6FB650")) else Color(android.graphics.Color.parseColor("#3B6A1C"))
     @Suppress("UNUSED_VARIABLE")
     val darkGrayColor = Color(0xFF141613)
     MaterialTheme {
