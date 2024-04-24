@@ -36,4 +36,4 @@ dependencyResolutionManagement {
 
 rootProject.name = "spido"
 include(":app")
- 
+include(":app:step-detector")
