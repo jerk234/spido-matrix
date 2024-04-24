@@ -34,10 +34,12 @@ import org.matrix.android.sdk.sample.AppTheme
 @Composable
 fun PicCardwithtext(
     navController: NavController,
-    img: Int // 图片资源 ID
+    img: Int, // 图片资源 ID
+    go:String,
+    title:String
 ) {
     Card(
-        onClick = { navController.navigate("Cardpage") },
+        onClick = { navController.navigate(go) },
         modifier = Modifier
             .padding(8.dp)
             .width(300.dp)
@@ -54,7 +56,7 @@ fun PicCardwithtext(
             )
             Column(modifier = Modifier.align(Alignment.BottomStart)) {
                 Text(
-                    text = "Wheelchair med ball cardio", // 替换为您想要显示的文本
+                    text = title, // 替换为您想要显示的文本
                     style = TextStyle(color = Color.White), // 调整文本样式和颜色
                     modifier = Modifier
                         .padding(start = 16.dp) // 可选：调整文本与图片之间的间距

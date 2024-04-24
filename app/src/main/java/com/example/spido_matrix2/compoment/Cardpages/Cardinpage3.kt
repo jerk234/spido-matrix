@@ -58,7 +58,7 @@ fun Cardpage3(navController: NavController){
 
                         ) {
                         Image(
-                            painter = painterResource(id = R.drawable.pexelsfit5), // 请用正确的文件名替换
+                            painter = painterResource(id = R.drawable.pexelsfit1), // 请用正确的文件名替换
                             contentDescription = "Your Image",
                             modifier = Modifier.fillMaxSize(),
                             contentScale = ContentScale.Crop // 填满整个区域

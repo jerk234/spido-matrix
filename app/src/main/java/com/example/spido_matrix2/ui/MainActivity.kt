@@ -34,6 +34,11 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.example.spido.pagemain.Overview
 import com.example.spido_matrix2.R
+import com.example.spido_matrix2.compoment.Cardpages.Cardpage
+import com.example.spido_matrix2.compoment.Cardpages.Cardpage2
+import com.example.spido_matrix2.compoment.Cardpages.Cardpage3
+import com.example.spido_matrix2.compoment.Cardpages.Cardpage4
+import com.example.spido_matrix2.compoment.Cardpages.Cardpage5
 
 import com.example.spido_matrix2.sensor.SensorInfoScreen
 import org.matrix.android.sdk.sample.AppTheme
@@ -65,7 +70,21 @@ class MainActivity : AppCompatActivity() {
                 val Bbq: ExpandableCardViewModel = viewModel()
 
                 NavHost(navController = navController, startDestination = "Userallow") {
-
+                    composable("Cardpage2") {
+                        Cardpage2(navController)
+                    }
+                    composable("Cardpage") {
+                        Cardpage(navController)
+                    }
+                    composable("Cardpage3") {
+                        Cardpage3(navController)
+                    }
+                    composable("Cardpage4") {
+                        Cardpage4(navController)
+                    }
+                    composable("Cardpage5") {
+                        Cardpage5(navController)
+                    }
                     composable("LoginButton") {
                         LoginScreen(navController) }
 
@@ -95,10 +114,6 @@ class MainActivity : AppCompatActivity() {
                     composable("Weight") {
                         Weight(navController, Bbq)
                     }
-
-
-
-
                     composable("Community") {
                         Community(navController)
                     }

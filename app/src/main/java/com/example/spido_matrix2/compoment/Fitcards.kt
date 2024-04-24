@@ -36,9 +36,12 @@ import com.example.spido_matrix2.R
 import org.matrix.android.sdk.sample.AppTheme
 
 @Composable
-fun fitcard(navController: NavController) {
+fun fitcard(navController: NavController,
+            img: Int, // 图片资源 ID
+            go:String,
+            title:String) {
     ElevatedCard(modifier = Modifier.padding(all = 8.dp),
-        onClick = { navController.navigate("Cardpage") },
+        onClick = { navController.navigate(go) },
     ) {
         Box(
             modifier = Modifier
@@ -51,7 +54,7 @@ fun fitcard(navController: NavController) {
 
                 ) {
                 Image(
-                    painter = painterResource(id = R.drawable.pexels2), // 请用正确的文件名替换
+                    painter = painterResource(id = img), // 请用正确的文件名替换
                     contentDescription = "Your Image",
                     modifier = Modifier.fillMaxSize(),
                     contentScale = ContentScale.Crop // 填满整个区域
@@ -64,7 +67,7 @@ fun fitcard(navController: NavController) {
             horizontalAlignment = Alignment.Start // 设置左对齐
         ) {
             Text(
-                text = "Weelchair med ball cardio",
+                text = title,
                 modifier = Modifier.padding(bottom = 12.dp),
                 fontSize = 20.sp,
                 style = TextStyle(fontWeight = FontWeight.SemiBold),
@@ -85,11 +88,11 @@ fun fitcard(navController: NavController) {
         }
     }
 }
-@Preview
-@Composable
-fun fitcardpv() {
-    AppTheme {
-        val navController = rememberNavController()
-        fitcard(navController = navController)
-    }
-}
+//@Preview
+//@Composable
+//fun fitcardpv() {
+//    AppTheme {
+//        val navController = rememberNavController()
+//        fitcard(navController = navController)
+//    }
+//}

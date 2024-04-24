@@ -97,11 +97,14 @@ fun Fitness(navController: NavController,viewModel: ExpandableCardViewModel) {
                     )
                     val expandableCardViewModel: ExpandableCardViewModel = viewModel()
                     Row(modifier = Modifier.horizontalScroll(rememberScrollState())) {
-                        PicCardwithtext(navController,img = R.drawable.pexels2)
-                        PicCardwithtext(navController,img = R.drawable.pexels3)
-                        PicCardwithtext(navController,img = R.drawable.pexelsfit1)
-                        PicCardwithtext(navController,img = R.drawable.pexelsfit2)
-
+                        PicCardwithtext(navController,
+                            img = R.drawable.pexels2,go = "Cardpage",title = "Lifts Trainning make you stronger")
+                        PicCardwithtext(navController,
+                            img = R.drawable.pexelsfit4,go = "Cardpage2",title = "Start your yoga routine")
+                        PicCardwithtext(navController,
+                            img = R.drawable.pexelsfit1,go = "Cardpage3",title = "Sure, here are some cycling exercise tips")
+                        PicCardwithtext(navController,
+                            img = R.drawable.pexelsfit2,go = "Cardpage4",title = "Now is time for Swimming")
                     }
                     Text(
                         text = "  Like", modifier = Modifier
@@ -109,9 +112,12 @@ fun Fitness(navController: NavController,viewModel: ExpandableCardViewModel) {
                             .padding(start = 8.dp), fontSize = 25.sp
                     )
                     Row(modifier = Modifier.horizontalScroll(rememberScrollState())) {
-                        fitcard(navController)
-                        fitcard(navController)
-                        fitcard(navController)
+                        fitcard(navController,
+                            img = R.drawable.pexelsfit1,go = "Cardpage3",title = "Cycling exercise tips")
+                        fitcard(navController,
+                            img = R.drawable.pexelsfit2,go = "Cardpage4",title = "Now is time for Swimming")
+                        fitcard(navController,
+                            img = R.drawable.pexelsfit4,go = "Cardpage2",title = "Start your yoga routine")
                     }
                     Text(
                         text = "  Fit", modifier = Modifier
@@ -119,9 +125,12 @@ fun Fitness(navController: NavController,viewModel: ExpandableCardViewModel) {
                             .padding(start = 8.dp), fontSize = 25.sp
                     )
                     Row(modifier = Modifier.horizontalScroll(rememberScrollState())) {
-                        fitcard(navController)
-                        fitcard(navController)
-                        fitcard(navController)
+                        fitcard(navController,
+                            img = R.drawable.pexelsfit1,go = "Cardpage3",title = "Cycling exercise tips")
+                        fitcard(navController,
+                            img = R.drawable.pexelsfit2,go = "Cardpage4",title = "Now is time for Swimming")
+                        fitcard(navController,
+                            img = R.drawable.pexels2,go = "Cardpage",title = "Lifts Trainning make you stronger")
                     }
                 }
             }
