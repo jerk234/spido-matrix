@@ -90,10 +90,10 @@ fun Fitness(navController: NavController,viewModel: ExpandableCardViewModel) {
                             .padding(all = 4.dp)
                             .padding(start = 8.dp), fontSize = 25.sp
                     )
-                    OutlinedTextField(value = viewModel.name.value,
-                        onValueChange = { newValue -> viewModel.name.value = newValue },
-                        label = { Text("Name") },
-                    )
+//                    OutlinedTextField(value = viewModel.name.value,
+//                        onValueChange = { newValue -> viewModel.name.value = newValue },
+//                        label = { Text("Name") },
+//                    )
                     val expandableCardViewModel: ExpandableCardViewModel = viewModel()
                     Row(modifier = Modifier.horizontalScroll(rememberScrollState())) {
                         ExpandableCard3(expandableCardViewModel,titletext =viewModel.name.value)
@@ -112,15 +112,15 @@ fun Fitness(navController: NavController,viewModel: ExpandableCardViewModel) {
                         HappyCard2()
                         HappyCard2()
                     }
-                    Text(
-                        text = "  Fit", modifier = Modifier
-                            .padding(all = 4.dp)
-                            .padding(start = 8.dp), fontSize = 25.sp
-                    )
+//                    Text(
+//                        text = "  Fit", modifier = Modifier
+//                            .padding(all = 4.dp)
+//                            .padding(start = 8.dp), fontSize = 25.sp
+//                    )
                     Row(modifier = Modifier.horizontalScroll(rememberScrollState())) {
-                        HappyCard()
-                        HappyCard()
-                        HappyCard()
+//                        HappyCard()
+//                        HappyCard()
+//                        HappyCard()
                     }
                 }
             }

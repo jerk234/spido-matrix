@@ -1,5 +1,5 @@
 package com.example.spido_matrix2.sensor
-//这个东西目前没预览，大概是有一些类冲突了。
+
 import android.Manifest
 import android.content.Context
 import android.hardware.Sensor
@@ -98,15 +98,15 @@ fun SensorInfoScreen(
         }
     }
 
-    // 设置定时器，每隔一段时间获取步数信息
-    // 这里假设使用 TYPE_ACCELEROMETER 传感器获取步数信息
+    // 使用加速度计传感器监听步数变化
     val sensorManager = context.getSystemService(Context.SENSOR_SERVICE) as SensorManager
     val accelerometerSensor = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER)
     val sensorListener = object : SensorEventListener {
         override fun onSensorChanged(event: SensorEvent) {
-            // 这里假设步数信息在 event.values[0] 中
-            val steps = event.values[0].toInt()
-            currentAccelSteps = steps
+            // 当加速度变化超过一定阈值时，增加步数
+            if (event.values[0] > 5) {
+                currentAccelSteps++
+            }
         }
 
         override fun onAccuracyChanged(sensor: Sensor?, accuracy: Int) {

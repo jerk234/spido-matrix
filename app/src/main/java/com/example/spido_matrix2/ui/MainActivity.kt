@@ -34,16 +34,18 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.example.spido.pagemain.Overview
 import com.example.spido_matrix2.R
-import com.example.spido_matrix2.SessionHolder
+
 import com.example.spido_matrix2.sensor.SensorInfoScreen
-import com.example.spido_matrix2.ui.RoomListFragment
-import com.example.spido_matrix2.ui.SimpleLoginFragment
 import org.matrix.android.sdk.sample.AppTheme
 import org.matrix.android.sdk.sample.compoment.ExpandableCardViewModel
 import org.matrix.android.sdk.sample.compoment.LoginScreen
 import org.matrix.android.sdk.sample.compoment.Userallow
 import org.matrix.android.sdk.sample.compoment.pagemain.Community
 import org.matrix.android.sdk.sample.compoment.pagemain.Fitness
+import org.matrix.android.sdk.sample.compoment.pagemain.Food
+import org.matrix.android.sdk.sample.compoment.pagemain.Water
+import org.matrix.android.sdk.sample.compoment.pagemain.Weight
+import org.matrix.android.sdk.sample.compoment.pagemain.sleeptime
 
 
 class MainActivity : AppCompatActivity() {
@@ -60,6 +62,7 @@ class MainActivity : AppCompatActivity() {
             this@MainActivity.navController = navController // Assigning to the class-level variable
 
             AppTheme {
+                val Bbq: ExpandableCardViewModel = viewModel()
 
                 NavHost(navController = navController, startDestination = "Userallow") {
 
@@ -73,11 +76,29 @@ class MainActivity : AppCompatActivity() {
                         LoginScreen(navController)
                     }
                     composable("Overview") {
-                        Overview(navController, expandableCardViewModel)
+                        Overview(navController, expandableCardViewModel,)
                     }
+
                     composable("Fitness") {
                         Fitness(navController,expandableCardViewModel)
                     }
+
+                    composable("sleeptime") {
+                        sleeptime(navController,Bbq)
+                    }
+                    composable("Water") {
+                        Water(navController,Bbq)
+                    }
+                    composable("Food") {
+                        Food(navController,Bbq)
+                    }
+                    composable("Weight") {
+                        Weight(navController, Bbq)
+                    }
+
+
+
+
                     composable("Community") {
                         Community(navController)
                     }
