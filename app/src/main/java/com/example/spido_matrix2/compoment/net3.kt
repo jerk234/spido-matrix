@@ -1,6 +1,8 @@
 package org.matrix.android.sdk.sample.compoment
 
 import android.content.res.Configuration
+import android.hardware.SensorEvent
+import android.hardware.SensorEventListener
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -52,7 +54,6 @@ import androidx.navigation.NavController
 import com.example.spido_matrix2.R
 import org.matrix.android.sdk.sample.AppTheme
 
-
 @Composable
 
 fun CustomProgressBar(
@@ -101,9 +102,39 @@ fun CustomProgressBar(
     }
 }
 
+@Composable
+fun CustomProgressBarWithSteps(
+    imageResId: Int,
+    startColor: Color,
+    endColor: Color,
+    currentSteps: Int,
+    goalSteps: Int,
+    strokeWidth: Dp,
+    modifier: Modifier = Modifier
+) {
+    val sweepAngle = remember {
+        // 将当前步数换算成角度
+        val percentage = minOf(currentSteps.toFloat() / goalSteps, 1f) // 防止超过100%
+        val angle = percentage * 260f // 总共260度
+        angle
+    }
+
+    CustomProgressBar(
+        imageResId = imageResId,
+        startColor = startColor,
+        endColor = endColor,
+        sweepAngle = sweepAngle,
+        strokeWidth = strokeWidth,
+        modifier = modifier
+    )
+}
+
 @Preview
 @Composable
 fun CustomProgressBarPreview() {
+    val currentSteps = 6000 // 假设当前步数为6000步
+    val goalSteps = 10000 // 设定的运动目标为10000步
+
     val configuration = LocalConfiguration.current
     val isDarkMode = configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK == Configuration.UI_MODE_NIGHT_YES
 
@@ -117,19 +148,19 @@ fun CustomProgressBarPreview() {
     // 根据当前的 UI 模式设置不同的颜色
     val startColor = if (isDarkMode) Color(android.graphics.Color.parseColor("#0D4400")) else Color(android.graphics.Color.parseColor("#E8EDDE"))
     val endColor = if (isDarkMode) Color(android.graphics.Color.parseColor("#6FB650")) else Color(android.graphics.Color.parseColor("#3B6A1C"))
-    @Suppress("UNUSED_VARIABLE")
-    val darkGrayColor = Color(0xFF141613)
+
     MaterialTheme {
         Column(
             modifier = Modifier
                 .background(if (isDarkMode) Color(0xFF141613) else Color(0xFFFCFDF3)) // 设置背景颜色，根据当前的 UI 模式
                 .fillMaxWidth() // 填充父布局
         ) {
-            CustomProgressBar(
+            CustomProgressBarWithSteps(
                 imageResId = progressBarImageResIds[0],
                 startColor = startColor,
                 endColor = endColor,
-                sweepAngle = 180f,
+                currentSteps = currentSteps,
+                goalSteps = goalSteps,
                 strokeWidth = 40.dp,
                 modifier = Modifier
                     .size(200.dp)
@@ -143,27 +174,30 @@ fun CustomProgressBarPreview() {
                 horizontalArrangement = Arrangement.SpaceEvenly,
                 verticalAlignment = Alignment.CenterVertically
             ) {
-                CustomProgressBar(
+                CustomProgressBarWithSteps(
                     imageResId = progressBarImageResIds[1],
                     startColor = startColor,
                     endColor = endColor,
-                    sweepAngle = 270f,
+                    currentSteps = currentSteps,
+                    goalSteps = goalSteps,
                     strokeWidth = 23.dp,
                 )
 
-                CustomProgressBar(
+                CustomProgressBarWithSteps(
                     imageResId = progressBarImageResIds[2],
                     startColor = startColor,
                     endColor = endColor,
-                    sweepAngle = 120f,
+                    currentSteps = currentSteps,
+                    goalSteps = goalSteps,
                     strokeWidth = 23.dp,
                 )
 
-                CustomProgressBar(
+                CustomProgressBarWithSteps(
                     imageResId = progressBarImageResIds[3],
                     startColor = startColor,
                     endColor = endColor,
-                    sweepAngle = 240f,
+                    currentSteps = currentSteps,
+                    goalSteps = goalSteps,
                     strokeWidth = 23.dp,
                 )
             }
