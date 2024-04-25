@@ -38,8 +38,6 @@ import org.matrix.android.sdk.sample.compoment.pagemain.OverViewCard3
 import org.matrix.android.sdk.sample.compoment.pagemain.OverViewCard4
 import org.matrix.android.sdk.sample.compoment.pagemain.OverViewCard5
 import org.matrix.android.sdk.sample.compoment.pagemain.OverViewCard6
-import org.matrix.android.sdk.sample.compoment.topappbarA
-import org.matrix.android.sdk.sample.compoment.topappbarB
 
 @Composable
 fun Future(navController: NavController) {

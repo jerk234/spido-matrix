@@ -1,6 +1,8 @@
 package org.matrix.android.sdk.sample.compoment
 
 import android.content.res.Configuration
+import android.hardware.SensorEvent
+import android.hardware.SensorEventListener
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -15,8 +17,8 @@ import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
-import androidx.compose.material.Icon
-import androidx.compose.material.Text
+import androidx.compose.material3.Icon
+import androidx.compose.material3.Text
 
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.AccountCircle
@@ -51,7 +53,6 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.example.spido_matrix2.R
 import org.matrix.android.sdk.sample.AppTheme
-
 
 @Composable
 
@@ -101,9 +102,39 @@ fun CustomProgressBar(
     }
 }
 
+@Composable
+fun CustomProgressBarWithSteps(
+    imageResId: Int,
+    startColor: Color,
+    endColor: Color,
+    currentSteps: Int,
+    goalSteps: Int,
+    strokeWidth: Dp,
+    modifier: Modifier = Modifier
+) {
+    val sweepAngle = remember {
+        // 将当前步数换算成角度
+        val percentage = minOf(currentSteps.toFloat() / goalSteps, 1f) // 防止超过100%
+        val angle = percentage * 260f // 总共260度
+        angle
+    }
+
+    CustomProgressBar(
+        imageResId = imageResId,
+        startColor = startColor,
+        endColor = endColor,
+        sweepAngle = sweepAngle,
+        strokeWidth = strokeWidth,
+        modifier = modifier
+    )
+}
+
 @Preview
 @Composable
 fun CustomProgressBarPreview() {
+    val currentSteps = 6000 // 假设当前步数为6000步
+    val goalSteps = 10000 // 设定的运动目标为10000步
+
     val configuration = LocalConfiguration.current
     val isDarkMode = configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK == Configuration.UI_MODE_NIGHT_YES
 
@@ -115,21 +146,21 @@ fun CustomProgressBarPreview() {
     }
 
     // 根据当前的 UI 模式设置不同的颜色
-    val startColor = if (isDarkMode) Color(android.graphics.Color.parseColor("#0D4400")) else Color(android.graphics.Color.parseColor("#3B6A1C"))
-    val endColor = if (isDarkMode) Color(android.graphics.Color.parseColor("#6FB650")) else Color(android.graphics.Color.parseColor("#E8EDDE"))
-    @Suppress("UNUSED_VARIABLE")
-    val darkGrayColor = Color(0xFF141613)
+    val startColor = if (isDarkMode) Color(android.graphics.Color.parseColor("#0D4400")) else Color(android.graphics.Color.parseColor("#E8EDDE"))
+    val endColor = if (isDarkMode) Color(android.graphics.Color.parseColor("#6FB650")) else Color(android.graphics.Color.parseColor("#3B6A1C"))
+
     MaterialTheme {
         Column(
             modifier = Modifier
                 .background(if (isDarkMode) Color(0xFF141613) else Color(0xFFFCFDF3)) // 设置背景颜色，根据当前的 UI 模式
                 .fillMaxWidth() // 填充父布局
         ) {
-            CustomProgressBar(
+            CustomProgressBarWithSteps(
                 imageResId = progressBarImageResIds[0],
                 startColor = startColor,
                 endColor = endColor,
-                sweepAngle = 180f,
+                currentSteps = currentSteps,
+                goalSteps = goalSteps,
                 strokeWidth = 40.dp,
                 modifier = Modifier
                     .size(200.dp)
@@ -143,27 +174,30 @@ fun CustomProgressBarPreview() {
                 horizontalArrangement = Arrangement.SpaceEvenly,
                 verticalAlignment = Alignment.CenterVertically
             ) {
-                CustomProgressBar(
+                CustomProgressBarWithSteps(
                     imageResId = progressBarImageResIds[1],
                     startColor = startColor,
                     endColor = endColor,
-                    sweepAngle = 270f,
+                    currentSteps = currentSteps,
+                    goalSteps = goalSteps,
                     strokeWidth = 23.dp,
                 )
 
-                CustomProgressBar(
+                CustomProgressBarWithSteps(
                     imageResId = progressBarImageResIds[2],
                     startColor = startColor,
                     endColor = endColor,
-                    sweepAngle = 120f,
+                    currentSteps = currentSteps,
+                    goalSteps = goalSteps,
                     strokeWidth = 23.dp,
                 )
 
-                CustomProgressBar(
+                CustomProgressBarWithSteps(
                     imageResId = progressBarImageResIds[3],
                     startColor = startColor,
                     endColor = endColor,
-                    sweepAngle = 240f,
+                    currentSteps = currentSteps,
+                    goalSteps = goalSteps,
                     strokeWidth = 23.dp,
                 )
             }
@@ -171,148 +205,148 @@ fun CustomProgressBarPreview() {
     }
 }
 
-
-@OptIn(ExperimentalMaterial3Api::class)
-@Suppress("UNUSED_PARAMETER")
-@Composable//标题栏1
-fun topappbarA(navController: NavController){
-    androidx.compose.material.TopAppBar(
-        modifier = Modifier.fillMaxWidth()
-//            .height(80.dp), // 设置首选高度为80dp
-        , backgroundColor = Color(0xFFF1F3E9)
-    ) {
-        Spacer(modifier = Modifier.width(12.dp))
-        androidx.compose.material.IconButton(onClick = { /*TODO*/ }) {
-            Icon(imageVector = Icons.Default.DensitySmall, contentDescription = null)
-        }
-
-        Spacer(modifier = Modifier.width(19.dp))
-        Text(
-            text = "               Firearms wiki",
-            textAlign = TextAlign.Center,
-            modifier = Modifier.weight(1f)
-        )
-
-        Spacer(modifier = Modifier.width(100.dp))
-//        IconButton(onClick = { /*TODO*/ }) {
-//            Icon(imageVector = Icons.Default.AttachFile, contentDescription = null)
-//        }
 //
-//        IconButton(onClick = { /*TODO*/ }) {
-//            Icon(imageVector = Icons.Default.CalendarToday, contentDescription = null)
-//        }
-
-        androidx.compose.material.IconButton(onClick = { /*TODO*/ }) {
-            Icon(imageVector = Icons.Default.AccountCircle, contentDescription = null)
-        }
-    }
-}
-
-@OptIn(ExperimentalMaterial3Api::class)
-@Suppress("UNUSED_PARAMETER")
-@Composable//标题栏2
-fun topappbarB(){
-    androidx.compose.material.TopAppBar(
-        modifier = Modifier.fillMaxWidth(), backgroundColor = Color(0xFFF1F3E9)
-    ) {
-        Spacer(modifier = Modifier.width(12.dp))
-        androidx.compose.material.IconButton(onClick = { /*TODO*/ }) {
-            Icon(imageVector = Icons.Default.AppRegistration, contentDescription = null)
-        }
-
-        Spacer(modifier = Modifier.width(12.dp))
-        Text(
-            text = "                       Today",
-            textAlign = TextAlign.Center,
-            modifier = Modifier.weight(1f)
-        )
-
-
-        Spacer(modifier = Modifier.width(100.dp))
-        androidx.compose.material.IconButton(onClick = { /*TODO*/ }) {
-            Icon(imageVector = Icons.Default.Today, contentDescription = null)
-        }
-
-        androidx.compose.material.IconButton(onClick = { /*TODO*/ }) {
-            Icon(imageVector = Icons.Default.MoreVert, contentDescription = null)
-        }
-
-//        IconButton(onClick = { /*TODO*/ }) {
+//@OptIn(ExperimentalMaterial3Api::class)
+//@Suppress("UNUSED_PARAMETER")
+//@Composable//标题栏1
+//fun topappbarA(navController: NavController){
+//    androidx.compose.material.TopAppBar(
+//        modifier = Modifier.fillMaxWidth()
+////            .height(80.dp), // 设置首选高度为80dp
+//        , backgroundColor = Color(0xFFF1F3E9)
+//    ) {
+//        Spacer(modifier = Modifier.width(12.dp))
+//        androidx.compose.material.IconButton(onClick = { /*TODO*/ }) {
 //            Icon(imageVector = Icons.Default.DensitySmall, contentDescription = null)
 //        }
-    }
-}
+//
+//        Spacer(modifier = Modifier.width(19.dp))
+//        Text(
+//            text = "               Firearms wiki",
+//            textAlign = TextAlign.Center,
+//            modifier = Modifier.weight(1f)
+//        )
+//
+//        Spacer(modifier = Modifier.width(100.dp))
+////        IconButton(onClick = { /*TODO*/ }) {
+////            Icon(imageVector = Icons.Default.AttachFile, contentDescription = null)
+////        }
+////
+////        IconButton(onClick = { /*TODO*/ }) {
+////            Icon(imageVector = Icons.Default.CalendarToday, contentDescription = null)
+////        }
+//
+//        androidx.compose.material.IconButton(onClick = { /*TODO*/ }) {
+//            Icon(imageVector = Icons.Default.AccountCircle, contentDescription = null)
+//        }
+//    }
+//}
 
-@Composable//底边栏
-fun SootheBottomNavigationA() {
-    Box(
-        Modifier.navigationBarsPadding(),
-        contentAlignment = Alignment.BottomCenter
-    ) {
-        Row(
-            modifier = Modifier
-                .background(Color(0xFFECEFE3)) // 设置背景颜色为#ECEFE3
-                .fillMaxWidth()
-                .padding(1.dp),
-            horizontalArrangement = Arrangement.SpaceEvenly
-        ) {
-            NavigationBarItem(
-                icon = {
-                    androidx.compose.material3.Icon(
-                        imageVector = Icons.Default.Radar,
-                        contentDescription = null
-                    )
-                },
-                label = {
-                    androidx.compose.material3.Text(
-                        text = "Overview"
-                    )
-                },
-                selected = false,
-                onClick = {
-                    // navController.navigate("Overview")
-                },
-                modifier = Modifier.background(Color(0xFFECEFE3))
-            )
-            NavigationBarItem(
-                icon = {
-                    androidx.compose.material3.Icon(
-                        imageVector = Icons.Default.RunCircle,
-                        contentDescription = null
-                    )
-                },
-                label = {
-                    androidx.compose.material3.Text(
-                        text = "Fitness"
-                    )
-                },
-                selected = false,
-                onClick = {
-                    // navController.navigate("Fitness")
-                },
-                modifier = Modifier.background(Color(0xFFECEFE3))
-            )
-            NavigationBarItem(
-                icon = {
-                    androidx.compose.material3.Icon(
-                        imageVector = Icons.Default.MarkUnreadChatAlt,
-                        contentDescription = null
-                    )
-                },
-                label = {
-                    androidx.compose.material3.Text(
-                        text = "Community"
-                    )
-                },
-                selected = false,
-                onClick = {
-                    // navController.navigate("Community")
-                },
-                modifier = Modifier.background(Color(0xFFECEFE3))
-            )
-        }
-    }
-}
+//@OptIn(ExperimentalMaterial3Api::class)
+//@Suppress("UNUSED_PARAMETER")
+//@Composable//标题栏2
+//fun topappbarB(){
+//    androidx.compose.material.TopAppBar(
+//        modifier = Modifier.fillMaxWidth(), backgroundColor = Color(0xFFF1F3E9)
+//    ) {
+//        Spacer(modifier = Modifier.width(12.dp))
+//        androidx.compose.material.IconButton(onClick = { /*TODO*/ }) {
+//            Icon(imageVector = Icons.Default.AppRegistration, contentDescription = null)
+//        }
+//
+//        Spacer(modifier = Modifier.width(12.dp))
+//        Text(
+//            text = "                       Today",
+//            textAlign = TextAlign.Center,
+//            modifier = Modifier.weight(1f)
+//        )
+//
+//
+//        Spacer(modifier = Modifier.width(100.dp))
+//        androidx.compose.material.IconButton(onClick = { /*TODO*/ }) {
+//            Icon(imageVector = Icons.Default.Today, contentDescription = null)
+//        }
+//
+//        androidx.compose.material.IconButton(onClick = { /*TODO*/ }) {
+//            Icon(imageVector = Icons.Default.MoreVert, contentDescription = null)
+//        }
+//
+////        IconButton(onClick = { /*TODO*/ }) {
+////            Icon(imageVector = Icons.Default.DensitySmall, contentDescription = null)
+////        }
+//    }
+//}
+
+//@Composable//底边栏
+//fun SootheBottomNavigationA() {
+//    Box(
+//        Modifier.navigationBarsPadding(),
+//        contentAlignment = Alignment.BottomCenter
+//    ) {
+//        Row(
+//            modifier = Modifier
+//                .background(Color(0xFFECEFE3)) // 设置背景颜色为#ECEFE3
+//                .fillMaxWidth()
+//                .padding(1.dp),
+//            horizontalArrangement = Arrangement.SpaceEvenly
+//        ) {
+//            NavigationBarItem(
+//                icon = {
+//                    androidx.compose.material3.Icon(
+//                        imageVector = Icons.Default.Radar,
+//                        contentDescription = null
+//                    )
+//                },
+//                label = {
+//                    androidx.compose.material3.Text(
+//                        text = "Overview"
+//                    )
+//                },
+//                selected = false,
+//                onClick = {
+//                    // navController.navigate("Overview")
+//                },
+//                modifier = Modifier.background(Color(0xFFECEFE3))
+//            )
+//            NavigationBarItem(
+//                icon = {
+//                    androidx.compose.material3.Icon(
+//                        imageVector = Icons.Default.RunCircle,
+//                        contentDescription = null
+//                    )
+//                },
+//                label = {
+//                    androidx.compose.material3.Text(
+//                        text = "Fitness"
+//                    )
+//                },
+//                selected = false,
+//                onClick = {
+//                    // navController.navigate("Fitness")
+//                },
+//                modifier = Modifier.background(Color(0xFFECEFE3))
+//            )
+//            NavigationBarItem(
+//                icon = {
+//                    androidx.compose.material3.Icon(
+//                        imageVector = Icons.Default.MarkUnreadChatAlt,
+//                        contentDescription = null
+//                    )
+//                },
+//                label = {
+//                    androidx.compose.material3.Text(
+//                        text = "Community"
+//                    )
+//                },
+//                selected = false,
+//                onClick = {
+//                    // navController.navigate("Community")
+//                },
+//                modifier = Modifier.background(Color(0xFFECEFE3))
+//            )
+//        }
+//    }
+//}
 
 @Preview(
     showBackground = true,

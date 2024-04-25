@@ -127,7 +127,6 @@ fun SensorInfoScreen(
     }
 }
 
-@Preview(showBackground = true)
 @Composable
 fun SensorInfoScreenPreview() {
     val context = LocalContext.current
