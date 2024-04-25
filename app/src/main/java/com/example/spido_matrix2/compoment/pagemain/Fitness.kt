@@ -33,6 +33,7 @@ import androidx.navigation.compose.rememberNavController
 import com.example.spido_matrix2.R
 import com.example.spido_matrix2.compoment.PicCardwithtext
 import com.example.spido_matrix2.compoment.fitcard
+import com.example.spido_matrix2.compoment.zxj
 import org.matrix.android.sdk.sample.compoment.ExpandableCard3
 import org.matrix.android.sdk.sample.compoment.ExpandableCard5
 import org.matrix.android.sdk.sample.compoment.ExpandableCard6
@@ -74,7 +75,7 @@ fun Fitness(navController: NavController,viewModel: ExpandableCardViewModel) {
                 ) {
                     OutlinedButton(modifier = Modifier.padding(horizontal = 6.dp),
                         onClick = {
-                            val intent = Intent(context, PoseActivity::class.java)
+                            val intent = Intent(context, zxj::class.java)
                             context.startActivity(intent)
                         }) {
                         Text(text = "Sit-ups")
