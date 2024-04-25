@@ -1,5 +1,6 @@
 package org.matrix.android.sdk.sample.compoment
 
+import android.content.Intent
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -21,6 +22,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
+import com.example.spido_matrix2.ui.Roomactivity
 
 
 @Suppress("UNUSED_VARIABLE","unused")
@@ -47,7 +49,8 @@ fun SootheBottomNavigation(navController: NavController){
                 )}, label = { Text(text = "Fitness")})
             NavigationBarItem(selected = false,
                 onClick = {
-                    navController.navigate("LoginScreen") // 导航到SimpleLoginFragment
+                    val intent = Intent(context, Roomactivity::class.java)
+                    context.startActivity(intent)
                 }, icon = { Icon(
                     imageVector = Icons.Default.MarkUnreadChatAlt,
                     contentDescription = null
@@ -97,7 +100,8 @@ fun SootheBottomNavigation2(navController: NavController) {
             NavigationBarItem(
                 selected = false,
                 onClick = {
-                    navController.navigate("LoginScreen") // 导航到SimpleLoginFragment
+                    val intent = Intent(context, Roomactivity::class.java)
+                    context.startActivity(intent)
                 },
                 icon = {
                     Icon(
@@ -115,7 +119,7 @@ fun SootheBottomNavigation2(navController: NavController) {
 @Composable
 fun SootheBottomNavigation3(navController: NavController) {
     var selectedNavItem by remember { mutableStateOf("Overview") }
-
+    val context = LocalContext.current
     NavigationBar {
         Row(
             modifier = Modifier
@@ -154,7 +158,8 @@ fun SootheBottomNavigation3(navController: NavController) {
             NavigationBarItem(
                 selected = true,
                 onClick = {
-                    navController.navigate("LoginScreen") // 导航到SimpleLoginFragment
+                    val intent = Intent(context, Roomactivity::class.java)
+                    context.startActivity(intent)
                 },
                 icon = {
                     Icon(

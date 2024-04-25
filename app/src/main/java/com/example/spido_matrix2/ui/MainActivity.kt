@@ -117,8 +117,8 @@ class MainActivity : AppCompatActivity() {
                     composable("Community") {
                         Community(navController)
                     }
-                    composable("SimpleLoginFragment"){
-                        SimpleLoginFragment()
+                    composable("RoomListFragment"){
+                        RoomListFragment()
                     }
                     composable("SimpleLoginFragment") {
                         FragmentLoginScreen(navController = navController)

@@ -19,7 +19,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:targetApi="31" >
-        <activity android:name=".ui.SimpleLoginFragment">
+        <activity android:name=".ui.Roomactivity">
             <!-- 这里添加适当的 intent-filter 424，只要在上面添加        android:name=".SampleApp"就能跑，因为有一些类就以这个命名-->
         </activity>
         <activity
