@@ -3,6 +3,7 @@ package org.matrix.android.sdk.sample.compoment.pagemain
 
 import android.annotation.SuppressLint
 import android.content.Intent
+import android.widget.Toast
 import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -81,15 +82,15 @@ fun Fitness(navController: NavController,viewModel: ExpandableCardViewModel) {
                         Text(text = "Sit-ups")
                     }
                     OutlinedButton(modifier = Modifier.padding(horizontal = 6.dp),
-                        onClick = { /*TODO*/ }) {
+                        onClick ={ Toast.makeText(context, "Working in progress", Toast.LENGTH_SHORT).show() }) {
                         Text(text = "Swimming")
                     }
                     OutlinedButton(modifier = Modifier.padding(horizontal = 6.dp),
-                        onClick = { /*TODO*/ }) {
+                        onClick = {Toast.makeText(context, "Working in progress", Toast.LENGTH_SHORT).show() }) {
                         Text(text = "Running")
                     }
                     OutlinedButton(modifier = Modifier.padding(horizontal = 6.dp),
-                        onClick = { /*TODO*/ }) {
+                        onClick = {Toast.makeText(context, "Working in progress", Toast.LENGTH_SHORT).show() }) {
                         Text(text = "Tennis")
                     }
                 }
