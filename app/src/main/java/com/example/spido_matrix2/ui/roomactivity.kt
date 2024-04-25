@@ -30,7 +30,7 @@ class Roomactivity : AppCompatActivity() {
 
         return super.onOptionsItemSelected(item)
     }
-
+//l
     private fun displayLogin() {
         val fragment = SimpleLoginFragment()
         supportFragmentManager.beginTransaction().replace(R.id.fragmentContainer, fragment).commit()

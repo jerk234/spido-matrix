@@ -155,6 +155,7 @@ fun SootheBottomNavigation3(navController: NavController) {
                 },
                 label = { Text(text = "Fitness") }
             )
+            //l
             NavigationBarItem(
                 selected = true,
                 onClick = {
