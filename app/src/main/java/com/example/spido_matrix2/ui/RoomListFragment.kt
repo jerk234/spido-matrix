@@ -2,12 +2,17 @@ package com.example.spido_matrix2.ui
 
 import android.os.Bundle
 import android.view.LayoutInflater
+import android.view.Menu
+import android.view.MenuInflater
+import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.spido_matrix2.R
 import com.example.spido_matrix2.utils.RecyclerScrollMoreListener
 import com.example.spido_matrix2.utils.TimelineEventListProcessor
 import com.stfalcon.chatkit.commons.models.IMessage
@@ -22,35 +27,53 @@ import org.matrix.android.sdk.api.session.room.timeline.TimelineEvent
 import org.matrix.android.sdk.api.session.room.timeline.TimelineSettings
 import org.matrix.android.sdk.api.util.toMatrixItem
 import com.example.spido_matrix2.SessionHolder
+import com.example.spido_matrix2.data.RoomSummaryDialogWrapper
 import com.example.spido_matrix2.utils.AvatarRenderer
 import com.example.spido_matrix2.utils.MatrixItemColorProvider
 import com.stfalcon.chatkit.commons.ImageLoader
 import org.matrix.android.sdk.api.session.getRoom
 import com.example.spido_matrix2.databinding.FragmentLoginBinding
 import com.example.spido_matrix2.databinding.FragmentRoomDetailBinding
+import com.example.spido_matrix2.databinding.FragmentRoomListBinding
+import com.example.spido_matrix2.formatter.RoomListDateFormatter
+import com.stfalcon.chatkit.dialogs.DialogsListAdapter
+import org.matrix.android.sdk.api.session.room.model.Membership
+import org.matrix.android.sdk.api.session.room.model.RoomSummary
+import org.matrix.android.sdk.api.session.room.roomSummaryQueryParams
 
-class RoomListFragment : Fragment(), Timeline.Listener, ToolbarConfigurable {
+/*
+ * Copyright (c) 2020 New Vector Ltd
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 
-    companion object {
 
-        private const val ROOM_ID_ARGS = "ROOM_ID_ARGS"
 
-        fun newInstance(roomId: String): RoomDetailFragment {
-            val args = bundleOf(
-                Pair(ROOM_ID_ARGS, roomId)
-            )
-            return RoomDetailFragment().apply {
-                arguments = args
-            }
-        }
-    }
-
-    private var _views: FragmentRoomDetailBinding? = null
-    private val views get() = _views!!
+class RoomListFragment : Fragment(), ToolbarConfigurable {
 
     private val session = SessionHolder.currentSession!!
-    private var timeline: Timeline? = null
-    private var room: Room? = null
+
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        _views = FragmentRoomListBinding.inflate(inflater, container, false)
+        return views.root
+    }
+
+    private var _views: FragmentRoomListBinding? = null
+    private val views get() = _views!!
 
     private val avatarRenderer by lazy {
         AvatarRenderer(MatrixItemColorProvider(requireContext()))
@@ -59,103 +82,77 @@ class RoomListFragment : Fragment(), Timeline.Listener, ToolbarConfigurable {
     private val imageLoader = ImageLoader { imageView, url, _ ->
         avatarRenderer.render(url, imageView)
     }
-
-    private val adapter = MessagesListAdapter<IMessage>(session.myUserId, imageLoader)
-    private val timelineEventListProcessor = TimelineEventListProcessor(adapter)
-
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        _views = FragmentRoomDetailBinding.inflate(inflater, container, false)
-        return views.root
-    }
+    private val roomAdapter = DialogsListAdapter<RoomSummaryDialogWrapper>(imageLoader)
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        configureToolbar(views.toolbar, displayBack = true)
-        views.textComposer.setInputListener {
-            // Sending message can be as simple as that.
-            // Timeline will be automatically updated with local echo
-            // and when receiving from sync so you don't have anything else to do
-            room?.sendService()?.sendTextMessage(it)
-            true
+        configureToolbar(views.toolbar, displayBack = false)
+        views.roomSummaryList.setAdapter(roomAdapter)
+        roomAdapter.setDatesFormatter(RoomListDateFormatter())
+        roomAdapter.setOnDialogClickListener {
+            showRoomDetail(it.roomSummary)
         }
 
-        views.textComposer.setTypingListener(object : MessageInput.TypingListener {
-            override fun onStartTyping() {
-                room?.typingService()?.userIsTyping()
-            }
+        // Create query to listen to room summary list
+        val roomSummariesQuery = roomSummaryQueryParams {
+            memberships = Membership.activeMemberships()
+        }
+        // Then you can subscribe to livedata..
+        session.roomService().getRoomSummariesLive(roomSummariesQuery).observe(viewLifecycleOwner) {
+            // ... And refresh your adapter with the list. It will be automatically updated when an item of the list is changed.
+            updateRoomList(it)
+        }
 
-            override fun onStopTyping() {
-                room?.typingService()?.userStopsTyping()
-            }
-        })
+        // You can also listen to user. Here we listen to ourself to get our avatar
+        session.userService().getUserLive(session.myUserId).observe(viewLifecycleOwner) { user ->
+            val userMatrixItem = user.map { it.toMatrixItem() }.getOrNull() ?: return@observe
+            avatarRenderer.render(userMatrixItem, views.toolbarAvatarImageView)
+        }
 
-        views.timelineEventList.setAdapter(adapter)
-        views.timelineEventList.itemAnimator = null
-        views.timelineEventList.addOnScrollListener(RecyclerScrollMoreListener(views.timelineEventList.layoutManager as LinearLayoutManager) {
-            if (timeline?.hasMoreToLoad(Timeline.Direction.BACKWARDS).orTrue()) {
-                timeline?.paginate(Timeline.Direction.BACKWARDS, 50)
-            }
-        })
-        val roomId = arguments?.getString(ROOM_ID_ARGS)!!
-        // You can grab a room from the session
-        // If the room is not known (not received from sync) it will return null
-        room = session.getRoom(roomId)
+        setHasOptionsMenu(true)
+    }
 
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId) {
+            else -> super.onOptionsItemSelected(item)
+        }
+    }
+
+    private fun signOut() {
         lifecycleScope.launch {
-            room?.readService()?.markAsRead(ReadService.MarkAsReadParams.READ_RECEIPT)
-        }
-
-        // Create some settings to configure timeline
-        val timelineSettings = TimelineSettings(
-            initialSize = 30
-        )
-        // Then you can retrieve a timeline from this room.
-        timeline = room?.timelineService()?.createTimeline(null, timelineSettings)?.also {
-            // Don't forget to add listener and start the timeline so it start listening to changes
-            it.addListener(this)
-            it.start()
-        }
-
-        // You can also listen to room summary from the room
-        room?.getRoomSummaryLive()?.observe(viewLifecycleOwner) { roomSummary ->
-            val roomSummaryAsMatrixItem =
-                roomSummary.map { it.toMatrixItem() }.getOrNull() ?: return@observe
-            avatarRenderer.render(roomSummaryAsMatrixItem, views.toolbarAvatarImageView)
-            views.toolbarTitleView.text = roomSummaryAsMatrixItem.let {
-                it.displayName?.takeIf { dn -> dn.isNotBlank() } ?: it.id
+            try {
+                session.signOutService().signOut(true)
+            } catch (failure: Throwable) {
+                activity?.let {
+                    Toast.makeText(it, "Failure: $failure", Toast.LENGTH_SHORT).show()
+                }
+                return@launch
             }
+
+            SessionHolder.currentSession = null
+            activity?.finish()
         }
     }
 
-    override fun onDestroyView() {
-        timeline?.also {
-            // Don't forget to remove listener and dispose timeline to avoid memory leaks
-            it.removeAllListeners()
-            it.dispose()
+    private fun showRoomDetail(roomSummary: RoomSummary) {
+        val roomDetailFragment = RoomDetailFragment.newInstance(roomSummary.roomId)
+        (activity as Roomactivity).supportFragmentManager
+            .beginTransaction()
+            .addToBackStack(null)
+            .replace(R.id.fragmentContainer, roomDetailFragment)
+            .commit()
+    }
+
+    private fun updateRoomList(roomSummaryList: List<RoomSummary>?) {
+        if (roomSummaryList == null) return
+        val sortedRoomSummaryList = roomSummaryList.sortedByDescending {
+            it.latestPreviewableEvent?.root?.originServerTs
+        }.map {
+            RoomSummaryDialogWrapper(it)
         }
-        timeline = null
-        room = null
-        super.onDestroyView()
-    }
-
-    override fun onNewTimelineEvents(eventIds: List<String>) {
-        // This is new event ids coming from sync
-    }
-
-    override fun onTimelineFailure(throwable: Throwable) {
-        // When a failure is happening when trying to retrieve an event.
-        // This is an unrecoverable error, you might want to restart the timeline
-        // timeline?.restartWithEventId("")
-    }
-
-    override fun onTimelineUpdated(snapshot: List<TimelineEvent>) {
-        // Each time the timeline is updated it will be called.
-        // It can happens when sync returns, paginating, and updating (local echo, decryption finished...)
-        // You probably want to process with DiffUtil before dispatching to your recyclerview
-        timelineEventListProcessor.onNewSnapshot(snapshot)
+        roomAdapter.setItems(sortedRoomSummaryList)
     }
 }
